@@ -41,7 +41,7 @@ function ManageProducts() {
       <label>Price</label>
       <input type="text" onChange={(e) => { setNewProd({ ...newProd, price: Number(e.target.value) }) }} /><br />
       <label>Active</label>
-      <input type="text" onChange={(e) => { setNewProd({ ...newProd, active: Boolean(e.target.checked) }) }} /><br />
+      <input type="text" onChange={(e) => { setNewProd({ ...newProd, active: e.target.checked }) }} /><br />
       <label>Stock</label>
       <input type="text" onChange={(e) => { setNewProd({ ...newProd, stock: Number(e.target.value) }) }} /><br />
       <button onClick={() => { addProd() }}></button>
