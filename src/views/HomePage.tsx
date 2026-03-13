@@ -8,7 +8,7 @@ import type { Product } from "../models/Product"
 function HomePage() {
   const [products, setProducts] = useState<Product[]>([])
   useEffect(()=>{
-      fetch("http://localhost:5000/products")
+      fetch(import.meta.env.VITE_BACK_URL + "/products")
     .then(res => res.json())
     .then(json => setProducts(json))
   },[])

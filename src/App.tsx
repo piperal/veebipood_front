@@ -24,6 +24,9 @@ function App() {
       <Link to="/manage-products">
         <button>Manage Products</button>
       </Link>
+      <Link to="/manage-catgories">
+        <button>Manage Categories</button>
+      </Link>
       <Routes>
         <Route path="" element={<HomePage />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
