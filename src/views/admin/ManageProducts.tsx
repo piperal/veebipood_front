@@ -9,13 +9,13 @@ function ManageProducts() {
   const [products, setProducts] = useState<Product[]>([])
   const [newProd, setNewProd] = useState<Product>({ name: "", description: "", price: 0, active: false, stock: 0 })
   useEffect(() => {
-    fetch(import.meta.env.VITE_BACK_URL + "/products")
+    fetch("https://kodutoo.onrender.com/products")
       .then(res => res.json())
       .then(json => setProducts(json))
   }, [])
 
   const addProd = () => {
-    fetch(import.meta.env.VITE_BACK_URL + "/products/add", {
+    fetch("https://kodutoo.onrender.com/products/add", {
       method: "POST",
       body: JSON.stringify(newProd),
       headers: {
@@ -27,7 +27,7 @@ function ManageProducts() {
   }
 
   const delProduct = (productId: number) => {
-    fetch(import.meta.env.VITE_BACK_URL + `/products/${productId}`, {
+    fetch(`https://kodutoo.onrender.com/products/${productId}`, {
       method: "DELETE"
     }).then(res => res.json()).then(json => setProducts(json))
   }
@@ -44,7 +44,7 @@ function ManageProducts() {
       <input type="text" onChange={(e) => { setNewProd({ ...newProd, active: e.target.checked }) }} /><br />
       <label>Stock</label>
       <input type="text" onChange={(e) => { setNewProd({ ...newProd, stock: Number(e.target.value) }) }} /><br />
-      <button onClick={() => { addProd() }}></button>
+      <button onClick={() => { addProd() }}>Add</button>
       <table>
         <thead>
           <tr>

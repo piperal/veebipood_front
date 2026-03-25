@@ -13,7 +13,7 @@ function ManageCategories() {
 
 
   const addCategory = () => {
-    fetch(import.meta.env.VITE_BACK_URL + "/category/add", {
+    fetch("https://kodutoo.onrender.com/category/add", {
       method:"POST",
       body:JSON.stringify(newCat),
       headers: {
@@ -25,7 +25,7 @@ function ManageCategories() {
   }
 
   const delcategory = (catId: number) => {
-    fetch(import.meta.env.VITE_BACK_URL + `/category/${catId}`, {
+    fetch(`https://kodutoo.onrender.com//category/${catId}`, {
       method: "DELETE"
     }).then(res=>res.json()).then(json=>setCategories(json))
   }
