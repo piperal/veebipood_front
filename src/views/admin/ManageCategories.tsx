@@ -6,7 +6,7 @@ function ManageCategories() {
   const [categories, setCategories] = useState<Category[]>([])
   const[newCat, setNewCat] = useState<Category>({name:""})
   useEffect(() => {
-    fetch(import.meta.env.VITE_BACK_URL + "/category")
+    fetch("https://kodutoo.onrender.com/category")
       .then(res => res.json())
       .then(json => setCategories(json))
   }, [])
