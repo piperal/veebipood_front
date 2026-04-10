@@ -8,7 +8,7 @@ import type { Category } from "../models/Category";
 
 function HomePage() {
   const [products, setProducts] = useState<Product[]>([])
-  const [totalElements, setTotalElements] = useState();
+  const [totalElements, setTotalElements] = useState(0);
   const [totalPages, setTotalPages] = useState();
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(2);

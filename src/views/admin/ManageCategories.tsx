@@ -33,7 +33,7 @@ function ManageCategories() {
   return (
     <div>
       <label>Name: </label>
-      <input type="text" onChange={(e)=>{setNewCat({name: e.target.value})}}/><br/>
+      <input onChange={(e)=>{setNewCat({name: e.target.value})}}/><br/>
       <button onClick={()=>{addCategory()}}></button>
       <table>
         <thead>
