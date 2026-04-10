@@ -7,7 +7,17 @@ import type { Product } from "../../models/Product"
 
 function ManageProducts() {
   const [products, setProducts] = useState<Product[]>([])
-  const [newProd, setNewProd] = useState<Product>({ name: "", description: "", price: 0, active: false, stock: 0 })
+  const [newProduct, setNewProduct] = useState<Product>({
+    name: "",
+    description: "",
+    price: 0,
+    active: false,
+    stock: 0,
+    category: {
+      id: 1,
+      name: ""
+    }
+  });
 
   //http://localhost:5000/products?page=1&size=1&sort=id,asc
   useEffect(() => {
@@ -22,7 +32,7 @@ function ManageProducts() {
   const addProd = () => {
     fetch(import.meta.env.VITE_BACK_URL + "/products/add", {
       method: "POST",
-      body: JSON.stringify(newProd),
+      body: JSON.stringify(newProduct),
       headers: {
         "Content-Type": "application/json"
       }
@@ -40,15 +50,16 @@ function ManageProducts() {
   return (
     <div>
       <label>Name</label>
-      <input type="text" onChange={(e) => { setNewProd({ ...newProd, name: e.target.value }) }} /><br />
+      <input type="text" onChange={(e) => { setNewProduct({ ...newProduct, name: e.target.value }) }} /><br />
       <label>Description</label>
-      <input type="text" onChange={(e) => { setNewProd({ ...newProd, description: e.target.value }) }} /><br />
+      <input type="text" onChange={(e) => { setNewProduct({ ...newProduct, description: e.target.value }) }} /><br />
       <label>Price</label>
-      <input type="text" onChange={(e) => { setNewProd({ ...newProd, price: Number(e.target.value) }) }} /><br />
+      <input type="text" onChange={(e) => { setNewProduct({ ...newProduct, price: Number(e.target.value) }) }} /><br />
       <label>Active</label>
-      <input type="text" onChange={(e) => { setNewProd({ ...newProd, active: e.target.checked }) }} /><br />
+      <input type="text" onChange={(e) => { setNewProduct({ ...newProduct, active: e.target.checked }) }} /><br />
       <label>Stock</label>
-      <input type="text" onChange={(e) => { setNewProd({ ...newProd, stock: Number(e.target.value) }) }} /><br />
+      <input type="text" onChange={(e) => { setNewProduct({ ...newProduct, stock: Number(e.target.value) }) }} /><br />
+      <label>Category</label> <br />
       <button onClick={() => { addProd() }}>Add</button>
       <table>
         <thead>

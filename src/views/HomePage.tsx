@@ -20,7 +20,7 @@ function HomePage() {
   useEffect(() => {
     fetch(import.meta.env.VITE_BACK_URL + "/category")
       .then(res => res.json())
-      .then(json => setCategories(json)) 
+      .then(json => setCategories(json))
   }, []);
 
 
@@ -49,6 +49,32 @@ function HomePage() {
   const activeCategoryHandler = (categoryId: number) => {
     setActiveCategoryId(categoryId);
     setPage(0)
+  }
+
+  /*
+  
+  To add to localstorage
+  1. Take old localstorage state, if doesent exist create array    JSON.parse(localStorage.getItem() || "[]")
+  2. Remove quotes  JSON.parse() 
+  3. Add item,      .push()
+  4. Add quaotes back JSON.stringidy() 
+  5. Put back into localstorage localstorage.setItem()
+
+  */
+
+  const addToCart = (product: Product) => {
+    const cart = JSON.parse(localStorage.getItem('cart') || "[]");
+    const foundProduct = cart.find(cartProduct => cartProduct.product.id === product.id)
+
+    if (foundProduct) {
+      foundProduct.quantity++
+    }
+    else {
+      cart.push({ product: product, quantity: 1 })
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
   }
 
   return (<>
@@ -82,7 +108,9 @@ function HomePage() {
     </div>
 
     <div>
-      {products.map(product => <div key={product.id}>{product.name} - {product.price}$</div>)}
+      {products.map(product => <div key={product.id}>{product.name} - {product.price}$
+        <button onClick={() => { addToCart(product) }}>Add to cart</button>
+      </div>)}
     </div>
 
     <button disabled={page === 0} onClick={() => { setPage(page - 1) }}>Previous</button>
