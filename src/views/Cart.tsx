@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 function Cart() {
-  const [orderRows, setOrderRows] = useState(JSON.parse(localStorage.getItem("cart")) || "[]")
+  const orderRows = JSON.parse((localStorage.getItem("cart")) || "[]")
 
   return (
     <>
