@@ -6,14 +6,14 @@ function ManageCategories() {
   const [categories, setCategories] = useState<Category[]>([])
   const[newCat, setNewCat] = useState<Category>({name:""})
   useEffect(() => {
-    fetch("https://kodutoo.onrender.com/category")
+    fetch(import.meta.env.VITE_BACK_URL + "/category")
       .then(res => res.json())
       .then(json => setCategories(json))
   }, [])
 
 
   const addCategory = () => {
-    fetch("https://kodutoo.onrender.com/category/add", {
+    fetch(import.meta.env.VITE_BACK_URL + "category/add", {
       method:"POST",
       body:JSON.stringify(newCat),
       headers: {
@@ -25,7 +25,7 @@ function ManageCategories() {
   }
 
   const delcategory = (catId: number) => {
-    fetch(`https://kodutoo.onrender.com//category/${catId}`, {
+    fetch(import.meta.env.VITE_BACK_URL + `/category/${catId}`, {
       method: "DELETE"
     }).then(res=>res.json()).then(json=>setCategories(json))
   }

@@ -8,14 +8,19 @@ import type { Product } from "../../models/Product"
 function ManageProducts() {
   const [products, setProducts] = useState<Product[]>([])
   const [newProd, setNewProd] = useState<Product>({ name: "", description: "", price: 0, active: false, stock: 0 })
+
+  //http://localhost:5000/products?page=1&size=1&sort=id,asc
   useEffect(() => {
-    fetch("https://kodutoo.onrender.com/products")
+    fetch(import.meta.env.VITE_BACK_URL + `/products`)
       .then(res => res.json())
-      .then(json => setProducts(json))
+      .then(json => {
+        setProducts(json.content);
+      }
+      )
   }, [])
 
   const addProd = () => {
-    fetch("https://kodutoo.onrender.com/products/add", {
+    fetch(import.meta.env.VITE_BACK_URL + "/products/add", {
       method: "POST",
       body: JSON.stringify(newProd),
       headers: {
@@ -27,7 +32,7 @@ function ManageProducts() {
   }
 
   const delProduct = (productId: number) => {
-    fetch(`https://kodutoo.onrender.com/products/${productId}`, {
+    fetch(import.meta.env.VITE_BACK_URL + `/products/${productId}`, {
       method: "DELETE"
     }).then(res => res.json()).then(json => setProducts(json))
   }
