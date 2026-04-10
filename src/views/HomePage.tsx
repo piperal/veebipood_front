@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react"
 import type { Product } from "../models/Product"
+import type { Category } from "../models/Category";
 
 
 function HomePage() {
@@ -12,9 +13,20 @@ function HomePage() {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(2);
   const [sort, setSort] = useState("id,asc")
+  const [categories, setCategories] = useState<Category[]>([])
+  const [activeCategoyId, setActiveCategoryId] = useState(0)
+
+
+  useEffect(() => {
+    fetch(import.meta.env.VITE_BACK_URL + "/category")
+      .then(res => res.json())
+      .then(json => setCategories(json)) 
+  }, []);
+
+
   ///http://localhost:5000/products?page=0&size=1&sort=id,asc
   useEffect(() => {
-    fetch(import.meta.env.VITE_BACK_URL + `/products?page=${page}&size=${size}&sort=${sort}`)
+    fetch(import.meta.env.VITE_BACK_URL + `/products?page=${page}&size=${size}&sort=${sort}&activeCateogryId=${activeCategoyId}`)
       .then(res => res.json())
       .then(json => {
         console.log(json)
@@ -22,7 +34,7 @@ function HomePage() {
         setTotalElements(json.totalElements);
         setTotalPages(json.totalPages)
       })
-  }, [page, size, sort])
+  }, [page, size, sort, activeCategoyId])
 
   const sizeHandler = (newSize: number) => {
     setSize(newSize);
@@ -31,6 +43,11 @@ function HomePage() {
 
   const sortHandler = (newSort: string) => {
     setSort(newSort);
+    setPage(0)
+  }
+
+  const activeCategoryHandler = (categoryId: number) => {
+    setActiveCategoryId(categoryId);
     setPage(0)
   }
 
@@ -52,6 +69,18 @@ function HomePage() {
     <button onClick={() => { sortHandler("name,asc") }}>Sort alpha</button>
     <button onClick={() => { sortHandler("name,desc") }}>Sort reverse alpha</button>
     <br></br>
+
+    <div>
+      {categories.map(category =>
+        <button style={activeCategoyId == category.id ? { color: "blue" } : undefined} onClick={() => activeCategoryHandler(Number(category.id))}>{category.name}</button>
+      )}
+    </div>
+
+    <button onClick={() => { activeCategoryHandler(0) }}>Kõik</button>
+    <div>
+
+    </div>
+
     <div>
       {products.map(product => <div key={product.id}>{product.name} - {product.price}$</div>)}
     </div>
