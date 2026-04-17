@@ -6,6 +6,10 @@ import AddProduct from './views/admin/AddProduct'
 import EditProduct from './views/admin/EditProduct'
 import ManageCategories from './views/admin/ManageCategories'
 import ManageProducts from './views/admin/ManageProducts'
+import Signup from './views/Signup'
+import Login from './views/Login'
+import ProductDetails from './views/ProductDetails'
+import NotFound from './views/NotFound'
 function App() {
 
   return (
@@ -34,9 +38,13 @@ function App() {
         <Route path="/edit-product" element={<EditProduct />}></Route>
         <Route path="/manage-products" element={<ManageProducts />}></Route>
         <Route path="/manage-catgories" element={<ManageCategories />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/product" element={<ProductDetails />}></Route>
+        <Route path="/*" element={<NotFound />}></Route>
       </Routes>
     </>
   )
-} 
+}
 
 export default App
