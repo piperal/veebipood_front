@@ -2,10 +2,10 @@ import type { Address } from "./Address"
 
 export type Person = {
     id?:number,
-    firstname:string,
+    firstName:string,
     lastName:string,
     email:string,
     password:string,
-    pesonalCode:string,
+    personalCode:string,
     address: Address
 }

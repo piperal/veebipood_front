@@ -31,6 +31,15 @@ function App() {
       <Link to="/manage-catgories">
         <button>Manage Categories</button>
       </Link>
+      <Link to="/profile">
+        <button>Profile</button>
+      </Link>
+      <Link to="/signup">
+        <button>Sign up</button>
+      </Link>
+      <Link to="/login">
+        <button>Log in</button>
+      </Link>
       <Routes>
         <Route path="" element={<HomePage />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
