@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react"
 import type { Product } from "../models/Product"
 import type { Category } from "../models/Category";
+import type { OrderRow } from "../models/OrderRow";
 
 
 function HomePage() {
@@ -63,7 +64,7 @@ function HomePage() {
   */
 
   const addToCart = (product: Product) => {
-    const cart = JSON.parse(localStorage.getItem('cart') || "[]");
+    const cart: OrderRow[] = JSON.parse(localStorage.getItem('cart') || "[]");
     const foundProduct = cart.find(cartProduct => cartProduct.product.id === product.id)
 
     if (foundProduct) {
