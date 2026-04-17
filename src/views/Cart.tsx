@@ -46,13 +46,19 @@ function Cart() {
   const confirmOrder = ()=>{
     const payload = orderRows.map(orderRow => ({productId:orderRow.product.id, quantity:orderRow.quantity}))
 
-    fetch(import.meta.env.VITE_BACK_URL + '/order/add?personId=1', {
+    fetch(import.meta.env.VITE_BACK_URL + '/order?personId=1', {
       method:"POST",
       body: JSON.stringify(payload),
       headers:{
         "Content-Type":"application/json"
       }
-    }).then(res =>res.json()).then(json => alert(json.id))
+    }).then(res => res.json()).then(json => {
+            if (json.message && json.timestamp && json.status) {
+                alert("An error occured: " + json.message)
+                return
+            }
+            alert("Signed up with id:" + json.id)
+        })
   }
 
   return (
