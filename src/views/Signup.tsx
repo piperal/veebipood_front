@@ -18,6 +18,7 @@ function Signup() {
                 return
             }
             alert("Signed up with id:" + json.id)
+            sessionStorage.setItem("token", json.id)
         })
     }
 

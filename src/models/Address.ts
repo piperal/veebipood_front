@@ -1,9 +1,9 @@
 export type Address = {
     id?: number,
-    number: number,
+    number: string,
     street: string,
     city:string,
     country:string,
-    zipcode:number
+    zipcode:string
 
 }

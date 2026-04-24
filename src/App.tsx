@@ -10,6 +10,7 @@ import Signup from './views/Signup'
 import Login from './views/Login'
 import ProductDetails from './views/ProductDetails'
 import NotFound from './views/NotFound'
+import Profile from './views/Profile'
 function App() {
 
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/manage-catgories" element={<ManageCategories />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
         <Route path="/product" element={<ProductDetails />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
       </Routes>
